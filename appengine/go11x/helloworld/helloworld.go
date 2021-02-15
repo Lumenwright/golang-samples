@@ -12,51 +12,55 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// [START gae_go111_app]
-
-// Sample helloworld is an App Engine app.
+// Sample helloworld is a basic App Engine flexible app.
+//modified to display random line from a file
 package main
 
-// [START import]
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 )
 
-// [END import]
-// [START main_func]
-
 func main() {
-	http.HandleFunc("/", indexHandler)
+	http.HandleFunc("/", handle)
 
-	// [START setting_port]
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
-		log.Printf("Defaulting to port %s", port)
 	}
-
 	log.Printf("Listening on port %s", port)
 	if err := http.ListenAndServe(":"+port, nil); err != nil {
 		log.Fatal(err)
 	}
-	// [END setting_port]
 }
 
-// [END main_func]
-
-// [START indexHandler]
-
-// indexHandler responds to requests with our greeting.
-func indexHandler(w http.ResponseWriter, r *http.Request) {
+func handle(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		http.NotFound(w, r)
 		return
 	}
-	fmt.Fprint(w, "Hello, World!")
-}
 
-// [END indexHandler]
-// [END gae_go111_app]
+	f, e := os.Open("random-makeout-quotes.json")
+	if e !- nil{
+		log.Fatal(e)
+	}
+
+	json, e := ioutil.ReadAll(f)
+	if e != nil {
+		log.Fatal(e)
+	}
+
+	data := make(map[string]interface{})
+	if e := json.Unmarshal(json, &data); e != nil {
+		log.Fatal(e)
+	}
+
+	if quote, contains := data["quote"]; contains{
+		fmt.Fprint(w, data["quote"])		
+	}
+
+}
