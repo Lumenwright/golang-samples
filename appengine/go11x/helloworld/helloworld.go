@@ -25,6 +25,14 @@ import (
 	"os"
 )
 
+type Quotes struct{
+	Quotes []Quote `json:"quotes"`
+}
+
+type Quote struct{
+	Quote string `json:"quote"`
+}
+
 func main() {
 	http.HandleFunc("/", handle)
 
@@ -44,23 +52,12 @@ func handle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	f, e := os.Open("random-makeout-quotes.json")
-	if e != nil{
-		log.Fatal(e)
-	}
+	f, _ := ioutil.ReadFile("random-makeout-quotes.json")
+	data := Quotes{}
 
-	text, e := ioutil.ReadAll(f)
-	if e != nil {
-		log.Fatal(e)
-	}
+	_ = json.Unmarshal([]byte(f), &data)
 
-	data := make(map[string]interface{})
-	if e := json.Unmarshal(text, &data); e != nil {
-		log.Fatal(e)
+	for i := 0; i < len(data.Quotes); i++ {
+		fmt.Fprint(w, data.Quotes[i].Quote)
 	}
-
-	if quote, contains := data["quote"]; contains{
-		fmt.Fprint(w, quote)		
-	}
-
 }
