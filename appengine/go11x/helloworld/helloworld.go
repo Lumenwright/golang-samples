@@ -58,7 +58,7 @@ func handle(w http.ResponseWriter, r *http.Request) {
 
 	_ = json.Unmarshal([]byte(f), &data)
 
-	i int := rand.Intn(len(data.Quotes))
+	i := rand.Intn(len(data.Quotes))
 	fmt.Fprint(w, data.Quotes[i].Quote)
 	
 }
