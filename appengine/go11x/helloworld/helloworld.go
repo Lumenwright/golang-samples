@@ -21,6 +21,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"math/rand"
 	"net/http"
 	"os"
 )
@@ -57,7 +58,7 @@ func handle(w http.ResponseWriter, r *http.Request) {
 
 	_ = json.Unmarshal([]byte(f), &data)
 
-	for i := 0; i < len(data.Quotes); i++ {
-		fmt.Fprint(w, data.Quotes[i].Quote)
-	}
+	i int := rand.Intn(len(data.Quotes))
+	fmt.Fprint(w, data.Quotes[i].Quote)
+	
 }
