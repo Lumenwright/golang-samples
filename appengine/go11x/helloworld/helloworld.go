@@ -60,7 +60,7 @@ func handle(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if quote, contains := data["quote"]; contains{
-		fmt.Fprint(w, data["quote"])		
+		fmt.Fprint(w, quote)		
 	}
 
 }
