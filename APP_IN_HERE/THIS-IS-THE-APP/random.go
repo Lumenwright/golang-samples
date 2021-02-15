@@ -13,10 +13,13 @@
 // limitations under the License.
 
 // Sample helloworld is a basic App Engine flexible app.
+//modified to display random line from a file
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -40,5 +43,24 @@ func handle(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
 		return
 	}
-	fmt.Fprint(w, "Hello world!")
+
+	f, e := os.Open("random-makeout-quotes.json")
+	if e !- nil{
+		log.Fatal(e)
+	}
+
+	json, e := ioutil.ReadAll(f)
+	if e != nil {
+		log.Fatal(e)
+	}
+
+	data := make(map[string]interface{})
+	if e := json.Unmarshal(json, &data); e != nil {
+		log.Fatal(e)
+	}
+
+	if quote, contains := data["quote"]; contains{
+		fmt.Fprint(w, data["quote"])		
+	}
+
 }
