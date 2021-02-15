@@ -49,13 +49,13 @@ func handle(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(e)
 	}
 
-	json, e := ioutil.ReadAll(f)
+	text, e := ioutil.ReadAll(f)
 	if e != nil {
 		log.Fatal(e)
 	}
 
 	data := make(map[string]interface{})
-	if e := json.Unmarshal(json, &data); e != nil {
+	if e := json.Unmarshal(text, &data); e != nil {
 		log.Fatal(e)
 	}
 
