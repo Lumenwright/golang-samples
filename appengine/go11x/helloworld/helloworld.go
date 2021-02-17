@@ -61,7 +61,7 @@ func handle(w http.ResponseWriter, r *http.Request) {
 	sender := r.URL.Query().Get("sender")
 	target := strings.ToLower(r.URL.Query().Get("target"))
 
-	if target == "anthony" || target == "xander" || target == "@xijaroandpitch" || target == "xijaro" || target == "pitch" {
+	if target == "anthony" || target == "xander" || target == "@xijaroandpitch" || target == "xijaro" || target == "pitch" || strings.Contains(target, sender) {
 
 		f, _ := ioutil.ReadFile("random-makeout-quotes.json")
 		data := Quotes{}
