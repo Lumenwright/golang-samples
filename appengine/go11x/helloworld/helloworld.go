@@ -62,9 +62,9 @@ func handle(w http.ResponseWriter, r *http.Request) {
 	targetOriginal := r.URL.Query().Get("target")
 	target := strings.ToLower(targetOriginal)
 
-	if target == "@lumenwright" || target == "lumen" || target == "lumenwright" {
+	if target == "lumen" || strings.Contains(target, "lumenwright") {
 		fmt.Fprint(w, "TREMBLE BEFORE MY GLORY, PUNY MORTAL")
-	} else if target == "anthony" || target == "xander" || target == "@xijaroandpitch" || target == "xijaro" || target == "pitch" || strings.Contains(target, sender) {
+	} else if strings.Contains(target, "anthony") || strings.Contains(target, "xander") || strings.Contains(target, "xijaro") || strings.Contains("pitch") || strings.Contains(target, sender) {
 
 		f, _ := ioutil.ReadFile("random-makeout-quotes.json")
 		data := Quotes{}
