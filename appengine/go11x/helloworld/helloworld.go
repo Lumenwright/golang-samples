@@ -63,14 +63,14 @@ func handle(w http.ResponseWriter, r *http.Request) {
 
 	line := data.Quotes[i].Quote
 	
-	sender := r.URL.Query()["sender"]
-	if len(sender) > 0 {
-		line = strings.Replace(line, "(sender)", sender, -1)
+	sender := r.URL.Query().Get("sender")
+	if sender != "" {
+		line = strings.Replace(line, "$(sender)", sender, -1)
 	}
 
-	target := r.URL.Query()["target"]
-	if len(target) > 0 {
-		line = strings.Replace(line, "(target)", target, -1)
+	target := r.URL.Query().Get("target")
+	if target != "" {
+		line = strings.Replace(line, "$(target)", target, -1)
 	}
 
 	fmt.Fprint(w, line)
