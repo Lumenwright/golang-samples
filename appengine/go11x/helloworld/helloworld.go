@@ -35,6 +35,10 @@ type Quote struct{
 	Quote string `json:"quote"`
 }
 
+type BotResponses struct{
+	BotResponses []Quote `json:"responses"`
+}
+
 func main() {
 	http.HandleFunc("/", handle)
 
@@ -54,25 +58,49 @@ func handle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	f, _ := ioutil.ReadFile("random-makeout-quotes.json")
-	data := Quotes{}
-
-	_ = json.Unmarshal([]byte(f), &data)
-
-	i := rand.Intn(len(data.Quotes))
-
-	line := data.Quotes[i].Quote
-	
 	sender := r.URL.Query().Get("sender")
-	if sender != "" {
-		line = strings.Replace(line, "$(sender)", sender, -1)
-	}
-
 	target := r.URL.Query().Get("target")
-	if target != "" {
-		line = strings.Replace(line, "$(target)", target, -1)
-	}
 
-	fmt.Fprint(w, line)
+	if target == "Anthony" || "Xander" || "@XiJaroAndPitch" || "@xijaroandpitch"{
+
+		f, _ := ioutil.ReadFile("random-makeout-quotes.json")
+		data := Quotes{}
 	
+		_ = json.Unmarshal([]byte(f), &data)
+	
+		i := rand.Intn(len(data.Quotes))
+	
+		line := data.Quotes[i].Quote
+
+		if sender != "" {
+			line = strings.Replace(line, "$(sender)", sender, -1)
+		}
+	
+		if target != "" {
+			line = strings.Replace(line, "$(target)", target, -1)
+		}
+	
+		fmt.Fprint(w, line)	
+	}
+	else{
+		
+		f, _ := ioutil.ReadFile("random-makeout-responses.json")
+		data := BotResponses{}
+
+		_ = json.Unmarshal([]byte(f), &data)
+
+		i := rand.Intn(len(data.BotResponses))
+
+		line := data.BotResponses[i].Quote
+
+		if sender != "" {
+			line = strings.Replace(line, "$(sender)", sender, -1)
+		}
+	
+		if target != "" {
+			line = strings.Replace(line, "$(target)", target, -1)
+		}
+	
+		fmt.Fprint(w, line)
+	}
 }
