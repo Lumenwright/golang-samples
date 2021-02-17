@@ -70,7 +70,7 @@ func handle(w http.ResponseWriter, r *http.Request) {
 
 	target := r.URL.Query().Get("target")
 	if target != "" {
-		line = strings.Replace(line, "${1:|$(sender)}", target, -1)
+		line = strings.Replace(line, "$(target)", target, -1)
 	}
 
 	fmt.Fprint(w, line)
