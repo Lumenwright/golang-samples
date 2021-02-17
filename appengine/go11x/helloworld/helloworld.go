@@ -65,12 +65,12 @@ func handle(w http.ResponseWriter, r *http.Request) {
 	
 	sender := r.URL.Query()["sender"]
 	if len(sender) > 0 {
-		line = strings.Replace(line, "$(sender)", sender, -1)
+		line = strings.Replace(line, "(sender)", sender, -1)
 	}
 
 	target := r.URL.Query()["target"]
 	if len(target) > 0 {
-		line = strings.Replace(line, "$(target)", target, -1)
+		line = strings.Replace(line, "(target)", target, -1)
 	}
 
 	fmt.Fprint(w, line)
