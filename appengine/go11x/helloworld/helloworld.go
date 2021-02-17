@@ -61,7 +61,9 @@ func handle(w http.ResponseWriter, r *http.Request) {
 	sender := r.URL.Query().Get("sender")
 	target := strings.ToLower(r.URL.Query().Get("target"))
 
-	if target == "anthony" || target == "xander" || target == "@xijaroandpitch" || target == "xijaro" || target == "pitch" || strings.Contains(target, sender) {
+	if target == "@lumenwright" || target == "lumen" || target == "lumenwright" {
+		fmt.Fprint(w, "TREMBLE BEFORE MY GLORY, PUNY MORTAL")
+	} else if target == "anthony" || target == "xander" || target == "@xijaroandpitch" || target == "xijaro" || target == "pitch" || strings.Contains(target, sender) {
 
 		f, _ := ioutil.ReadFile("random-makeout-quotes.json")
 		data := Quotes{}
@@ -81,8 +83,6 @@ func handle(w http.ResponseWriter, r *http.Request) {
 		}
 	
 		fmt.Fprint(w, line)	
-	} else if target == "@lumenwright" || target == "lumen" || target == "lumenwright" {
-		fmt.Fprint(w, "TREMBLE BEFORE MY GLORY, PUNY MORTAL")
 	} else {
 		f, _ := ioutil.ReadFile("random-makeout-responses.json")
 		data := BotResponses{}
