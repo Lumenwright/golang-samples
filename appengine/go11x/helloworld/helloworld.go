@@ -59,7 +59,8 @@ func handle(w http.ResponseWriter, r *http.Request) {
 	}
 
 	sender := r.URL.Query().Get("sender")
-	target := strings.ToLower(r.URL.Query().Get("target"))
+	targetOriginal := r.URL.Query().Get("target")
+	target := strings.ToLower(targetOriginal)
 
 	if target == "@lumenwright" || target == "lumen" || target == "lumenwright" {
 		fmt.Fprint(w, "TREMBLE BEFORE MY GLORY, PUNY MORTAL")
@@ -79,7 +80,7 @@ func handle(w http.ResponseWriter, r *http.Request) {
 		}
 	
 		if target != "" {
-			line = strings.Replace(line, "$(target)", target, -1)
+			line = strings.Replace(line, "$(target)", targetOriginal, -1)
 		}
 	
 		fmt.Fprint(w, line)	
@@ -98,7 +99,7 @@ func handle(w http.ResponseWriter, r *http.Request) {
 		}
 	
 		if target != "" {
-			line = strings.Replace(line, "$(target)", target, -1)
+			line = strings.Replace(line, "$(target)", targetOriginal, -1)
 		}
 	
 		fmt.Fprint(w, line)
