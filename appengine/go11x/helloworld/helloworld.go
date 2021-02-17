@@ -61,7 +61,7 @@ func handle(w http.ResponseWriter, r *http.Request) {
 	sender := r.URL.Query().Get("sender")
 	target := r.URL.Query().Get("target")
 
-	if target == "Anthony" || "Xander" || "@XiJaroAndPitch" || "@xijaroandpitch" {
+	if target == "Anthony" || target == "Xander" || target == "@XiJaroAndPitch" || target == "@xijaroandpitch" {
 
 		f, _ := ioutil.ReadFile("random-makeout-quotes.json")
 		data := Quotes{}
