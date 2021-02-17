@@ -64,7 +64,7 @@ func handle(w http.ResponseWriter, r *http.Request) {
 
 	if target == "lumen" || strings.Contains(target, "lumenwright") {
 		fmt.Fprint(w, "TREMBLE BEFORE MY GLORY, PUNY MORTAL")
-	} else if strings.Contains(target, "anthony") || strings.Contains(target, "xander") || strings.Contains(target, "xijaro") || strings.Contains("pitch") || strings.Contains(target, sender) {
+	} else if strings.Contains(target, "anthony") || strings.Contains(target, "xander") || strings.Contains(target, "xijaro") || strings.Contains(target, "pitch") || strings.Contains(target, sender) {
 
 		f, _ := ioutil.ReadFile("random-makeout-quotes.json")
 		data := Quotes{}
