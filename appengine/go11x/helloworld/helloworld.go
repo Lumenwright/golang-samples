@@ -24,6 +24,7 @@ import (
 	"math/rand"
 	"net/http"
 	"os"
+	"strings"
 )
 
 type Quotes struct{
@@ -59,6 +60,19 @@ func handle(w http.ResponseWriter, r *http.Request) {
 	_ = json.Unmarshal([]byte(f), &data)
 
 	i := rand.Intn(len(data.Quotes))
-	fmt.Fprint(w, data.Quotes[i].Quote)
+
+	line := data.Quotes[i].Quote
+	
+	sender := r.URL.Query()["sender"]
+	if len(sender) > 0 {
+		line = strings.Replace(line, "$(sender)", sender, -1)
+	}
+
+	target := r.URL.Query()["target"]
+	if len(target) > 0 {
+		line = strings.Replace(line, "$(target)", target, -1)
+	}
+
+	fmt.Fprint(w, line)
 	
 }
