@@ -59,7 +59,7 @@ func handle(w http.ResponseWriter, r *http.Request) {
 	}
 
 	sender := r.URL.Query().Get("sender")
-	target := r.URL.Query().Get("target").ToLower()
+	target := strings.ToLower(r.URL.Query().Get("target"))
 
 	if target == "anthony" || target == "xander" || target == "@xijaroandpitch" || target == "xijaro" || target == "pitch" {
 
