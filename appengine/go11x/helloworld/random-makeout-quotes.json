@@ -7,5 +7,8 @@
 {"quote":"Get a room $(sender) and $(target), you're taking up the whole couch!"},
 {"quote":"$(sender) offers to exchange saliva with $(target). $(target) throws a drink in their face and leaves."},
 {"quote":"$(sender) makes out with $(target). Yeah, get some $(sender)!"},
-{"quote":"$(sender) and $(target) **** like **** behind the shed. It's actually kind of hot."}
+{"quote":"$(sender) and $(target) **** like **** behind the shed."},
+{"quote":"$(sender) and #(target) make out. Something new awakens in them..."},
+{"quote":"$(sender) and $(target) make out. It’s actually kind of hot."},
+{"quote":"Hey $(target), $(sender) wants to meet you behind the shed ;)"}
     ]}
