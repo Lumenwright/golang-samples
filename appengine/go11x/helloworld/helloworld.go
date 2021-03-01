@@ -62,7 +62,7 @@ func handle(w http.ResponseWriter, r *http.Request) {
 	targetOriginal := r.URL.Query().Get("target")
 	target := strings.ToLower(targetOriginal)
 
-	if target == "lumen" || strings.Contains(target, "lumenwright") {
+	if (target == "lumen" || strings.Contains(target, "lumenwright")) && sender != "lumenwright" {
 		fmt.Fprint(w, "TREMBLE BEFORE MY GLORY, PUNY MORTAL")
 	} else if strings.Contains(target, "anthony") || strings.Contains(target, "xander") || strings.Contains(target, "xijaro") || strings.Contains(target, "pitch") || strings.Contains(target, sender) {
 
