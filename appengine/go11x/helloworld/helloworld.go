@@ -25,6 +25,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 )
 
 type Quotes struct{
