@@ -40,6 +40,7 @@ type BotResponses struct{
 }
 
 func main() {
+	rand.Seed(time.Now().UTC().UnixNano())
 	http.HandleFunc("/", handle)
 
 	port := os.Getenv("PORT")
